@@ -1,0 +1,273 @@
+/* SMALL REEL TILE (LIST) */
+.reel-tile {
+  position: relative;
+  height: 100vh;
+  background: #000;
+  cursor: pointer;
+}
+
+.reel-tile-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 40%);
+}
+
+.reel-tile-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  color: #fff;
+}
+
+.reel-tile-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.reel-tile-user img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.reel-tile-user svg {
+  font-size: 28px;
+}
+
+.reel-tile-user span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.reel-tile-caption {
+  font-size: 12px;
+  max-width: 80%;
+}
+
+/* FULLSCREEN OVERLAY */
+.reel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.8), #000);
+}
+
+/* CARD */
+.reel-card {
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: rgba(15, 15, 15, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* HEADER */
+.reel-card-header {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reel-card-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reel-card-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.reel-card-avatar-icon {
+  font-size: 32px;
+  color: #c7c7c7;
+}
+
+.reel-card-username {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.reel-card-close {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* MAIN */
+.reel-card-main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* VIDEO SIDE */
+.reel-card-video-wrap {
+  flex: 2;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reel-card-video {
+  width: 100%;
+  height: 100%;
+  max-height: 80vh;
+  object-fit: cover;
+}
+
+/* INFO SIDE */
+.reel-card-info {
+  flex: 1.2;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+}
+
+/* ACTIONS */
+.reel-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.reel-card-action-btn {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.reel-card-action-icon {
+  font-size: 22px;
+}
+
+.reel-card-action-icon.liked {
+  color: #ed4956;
+}
+
+.reel-card-likes {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* CAPTION */
+.reel-card-caption {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.reel-card-caption-user {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+/* COMMENTS */
+.reel-card-comments {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 6px;
+  padding-right: 4px;
+}
+
+.reel-card-comments::-webkit-scrollbar {
+  width: 4px;
+}
+
+.reel-card-comments::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+
+.reel-card-comment-line {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.reel-card-comment-user {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+/* COMMENT INPUT */
+.reel-card-comment-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 6px;
+}
+
+.reel-card-comment-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.reel-card-comment-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.reel-card-comment-post {
+  border: none;
+  background: transparent;
+  color: #0095f6;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .reel-card {
+    max-width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .reel-card-main {
+    flex-direction: column;
+  }
+
+  .reel-card-video-wrap {
+    flex: 2;
+  }
+
+  .reel-card-info {
+    flex: 1;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}

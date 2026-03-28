@@ -1,0 +1,67 @@
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 30px;
+  background: #fff;
+  border-bottom: 1px solid #dbdbdb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo on the left */
+.navbar-left {
+  flex: 1;
+}
+
+.navbar-left .logo {
+  font-family: 'Grand Hotel', cursive;
+  font-size: 28px;
+  color: #262626;
+}
+
+/* Nav buttons centered */
+.navbar-center {
+  display: flex;
+  justify-content: center; /* center content */
+  flex: 2; /* take up remaining space */
+  gap: 40px; /* equal spacing between buttons */
+}
+
+.navbar-center button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #262626;
+  transition: color 0.2s;
+}
+
+.navbar-center button:hover {
+  color: #3897f0;
+}
+
+/* Logout button on right */
+.navbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* push logout to right */
+}
+
+.navbar-right .logout-btn {
+  background: #ff3b30;
+  border: none;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.navbar-right .logout-btn:hover {
+  background: #e02a20;
+}
