@@ -11,14 +11,12 @@ function Admin() {
 
   const fetchReported = async () => {
     const snapshot = await getDocs(collection(db, "posts"));
-
     const reportedPosts = snapshot.docs
-      .map(doc => ({
-        id: doc.id,
-        ...doc.data()
+      .map(d => ({          // ✅ renamed from doc → d
+        id: d.id,
+        ...d.data()
       }))
       .filter(post => post.reported === true);
-
     setPosts(reportedPosts);
   };
 
@@ -26,8 +24,6 @@ function Admin() {
     try {
       await deleteDoc(doc(db, "posts", id));
       alert("Reel deleted ❌");
-
-      // refresh list
       fetchReported();
     } catch (err) {
       console.error(err);
@@ -37,24 +33,21 @@ function Admin() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>🛠 Admin Panel</h2>
-
       {posts.length === 0 && <p>No reported reels 🎉</p>}
-
       {posts.map(post => (
         <div
           key={post.id}
           style={{
             marginBottom: "20px",
             border: "1px solid #ccc",
-            padding: "10px"
+            padding: "10px",
+            borderRadius: "8px"
           }}
         >
           <video src={post.videoUrl} width="300" controls />
-
-          <p><b>{post.name}</b></p>
+          <p><b>{post.username}</b></p>
           <p>{post.caption}</p>
-          <p>Reports: {post.reports}</p>
-
+          <p>Reported by: {post.reportedBy?.length || 0} user(s)</p>
           <button
             onClick={() => deletePost(post.id)}
             style={{
@@ -62,7 +55,8 @@ function Admin() {
               color: "white",
               padding: "8px",
               border: "none",
-              borderRadius: "5px"
+              borderRadius: "5px",
+              cursor: "pointer"
             }}
           >
             ❌ Delete Reel

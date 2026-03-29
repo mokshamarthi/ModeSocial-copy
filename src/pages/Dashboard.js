@@ -54,20 +54,16 @@ function Dashboard({ setPage, setSelectedUserUid, mode }) {
     fetchUsers();
   }, [uid]);
 
-  // 🔥 FETCH POSTS (HIDE REPORTED BY USER + FILTER BY MODE)
+  // 🔥 FETCH POSTS (FILTER BY MODE)
   useEffect(() => {
     const fetchPosts = async () => {
       const snap = await getDocs(collection(db, "posts"));
       const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
 
-      const visible = data.filter(post => {
-        return !(post.hiddenFor?.includes(uid));
-      });
-
       const filteredByMode =
         mode === "all"
-          ? visible
-          : visible.filter(post => {
+          ? data
+          : data.filter(post => {
               if (!post.mode) return true;
               return post.mode === mode;
             });
@@ -159,13 +155,18 @@ function Dashboard({ setPage, setSelectedUserUid, mode }) {
     );
   };
 
-  // 🚨 REPORT (HIDE POST FOR USER)
+  // 🚨 REPORT — sends to admin panel, shows popup, post stays visible
   const handleReport = async postId => {
+    //const post = posts.find(p => p.id === postId);
+
     await updateDoc(doc(db, "posts", postId), {
-      hiddenFor: arrayUnion(uid)
+      reported: true,
+      reportedBy: arrayUnion(uid)
     });
 
-    setPosts(prev => prev.filter(p => p.id !== postId));
+    setShowReportMenu(prev => ({ ...prev, [postId]: false }));
+    setCopiedPostId(`report_${postId}`);
+    setTimeout(() => setCopiedPostId(null), 2500);
   };
 
   // 🔗 SHARE — copies Cloudinary videoUrl + shows centered popup
@@ -219,19 +220,19 @@ function Dashboard({ setPage, setSelectedUserUid, mode }) {
 
   // mark a story as viewed for current user
   const markStoryViewed = useCallback(async (storyOwnerUid) => {
-  if (!uid || !storyOwnerUid) return;
-  if (currentUserViewedStories.includes(storyOwnerUid)) return;
+    if (!uid || !storyOwnerUid) return;
+    if (currentUserViewedStories.includes(storyOwnerUid)) return;
 
-  setCurrentUserViewedStories(prev => [...prev, storyOwnerUid]);
+    setCurrentUserViewedStories(prev => [...prev, storyOwnerUid]);
 
-  try {
-    await updateDoc(doc(db, "users", uid), {
-      viewedStories: arrayUnion(storyOwnerUid)
-    });
-  } catch (e) {
-    // ignore
-  }
-}, [uid, currentUserViewedStories]);
+    try {
+      await updateDoc(doc(db, "users", uid), {
+        viewedStories: arrayUnion(storyOwnerUid)
+      });
+    } catch (e) {
+      // ignore
+    }
+  }, [uid, currentUserViewedStories]);
 
   // open story viewer on avatar click
   const openStoryViewer = idx => {
@@ -244,18 +245,18 @@ function Dashboard({ setPage, setSelectedUserUid, mode }) {
 
   // auto-advance story
   const goToNextStory = useCallback(() => {
-  if (viewStoryIndex == null) return;
+    if (viewStoryIndex == null) return;
 
-  const nextIndex = viewStoryIndex + 1;
+    const nextIndex = viewStoryIndex + 1;
 
-  if (nextIndex < stories.length) {
-    setViewStoryIndex(nextIndex);
-    const story = stories[nextIndex];
-    if (story) markStoryViewed(story.uid);
-  } else {
-    setViewStoryIndex(null);
-  }
-}, [viewStoryIndex, stories, markStoryViewed]);
+    if (nextIndex < stories.length) {
+      setViewStoryIndex(nextIndex);
+      const story = stories[nextIndex];
+      if (story) markStoryViewed(story.uid);
+    } else {
+      setViewStoryIndex(null);
+    }
+  }, [viewStoryIndex, stories, markStoryViewed]);
 
   const closeStoryViewer = () => {
     setViewStoryIndex(null);
@@ -263,28 +264,37 @@ function Dashboard({ setPage, setSelectedUserUid, mode }) {
 
   // auto-advance after 5s
   useEffect(() => {
-  if (viewStoryIndex == null) return;
+    if (viewStoryIndex == null) return;
 
-  const timer = setTimeout(() => {
-    goToNextStory();
-  }, 5000);
+    const timer = setTimeout(() => {
+      goToNextStory();
+    }, 5000);
 
-  return () => clearTimeout(timer);
-}, [viewStoryIndex, goToNextStory]);
+    return () => clearTimeout(timer);
+  }, [viewStoryIndex, goToNextStory]);
 
-  const currentStory =
-    viewStoryIndex != null ? stories[viewStoryIndex] : null;
+  const currentStory = viewStoryIndex != null ? stories[viewStoryIndex] : null;
 
   return (
     <div className="dashboard-container">
 
-      {/* CENTERED COPY POPUP */}
+      {/* CENTERED POPUP — handles both Copy & Report */}
       {copiedPostId && (
         <div className="copy-popup-overlay">
           <div className="copy-popup">
-            <span className="copy-popup-icon">🔗</span>
-            <p className="copy-popup-title">Link Copied!</p>
-            <p className="copy-popup-sub">Video link copied to clipboard</p>
+            {copiedPostId.startsWith("report_") ? (
+              <>
+                <span className="copy-popup-icon">🚨</span>
+                <p className="copy-popup-title">Reported!</p>
+                <p className="copy-popup-sub">Our team will review this post</p>
+              </>
+            ) : (
+              <>
+                <span className="copy-popup-icon">🔗</span>
+                <p className="copy-popup-title">Link Copied!</p>
+                <p className="copy-popup-sub">Video link copied to clipboard</p>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -341,9 +351,7 @@ function Dashboard({ setPage, setSelectedUserUid, mode }) {
                 <div
                   className={
                     "story-profile-ring " +
-                    (isViewed
-                      ? "story-ring-viewed"
-                      : "story-ring-unviewed")
+                    (isViewed ? "story-ring-viewed" : "story-ring-unviewed")
                   }
                 >
                   <div className="story-profile-inner">
