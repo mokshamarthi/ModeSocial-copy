@@ -19,19 +19,25 @@ function App() {
 
   const [selectedUserUid, setSelectedUserUid] = useState(null);
 
+  // ✅ Admin check
   const isAdmin = localStorage.getItem("isAdmin") === "true";
 
   return (
     <div className="app-container">
 
-      {/* Navbar */}
+      {/* ✅ Navbar */}
       {page !== "login" && page !== "register" && (
         <div className="navbar">
+
+          {/* Left */}
           <div className="navbar-left">
             <h2 className="logo">ModeSocial</h2>
           </div>
 
+          {/* Center */}
           <div className="navbar-center">
+
+            {/* Home */}
             <button
               onClick={() => {
                 setMode("all");
@@ -43,6 +49,7 @@ function App() {
               Home
             </button>
 
+            {/* Reels */}
             <button
               onClick={() => {
                 setSelectedUserUid(null);
@@ -52,23 +59,30 @@ function App() {
               Reels
             </button>
 
+            {/* Mode */}
             <button onClick={() => setPage("mode")}>
               Select Mode
             </button>
 
-            <button onClick={() => setPage("create")}>
-              Create Post
-            </button>
+            {/* ❌ Hidden for Admin */}
+            {!isAdmin && (
+              <>
+                <button onClick={() => setPage("create")}>
+                  Create Post
+                </button>
 
-            <button
-              onClick={() => {
-                setSelectedUserUid(null);
-                setPage("profile");
-              }}
-            >
-              Profile
-            </button>
+                <button
+                  onClick={() => {
+                    setSelectedUserUid(null);
+                    setPage("profile");
+                  }}
+                >
+                  Profile
+                </button>
+              </>
+            )}
 
+            {/* ✅ Only Admin */}
             {isAdmin && (
               <button onClick={() => setPage("admin")}>
                 Admin
@@ -76,6 +90,7 @@ function App() {
             )}
           </div>
 
+          {/* Right */}
           <div className="navbar-right">
             <button
               className="logout-btn"
@@ -89,13 +104,13 @@ function App() {
               Logout
             </button>
           </div>
+
         </div>
       )}
 
-      {/* Main content */}
+      {/* ✅ Main content */}
       <div className="main-content">
 
-        {/* ✅ FIXED: pass setPage directly */}
         {page === "login" && (
           <Login setPage={setPage} />
         )}

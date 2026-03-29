@@ -11,11 +11,25 @@
   margin-bottom: 30px;
 }
 
+.profile-pic-wrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .profile-pic {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.profile-pic-default {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  color: #ccc;
 }
 
 .profile-info h2 {
@@ -28,14 +42,164 @@
   font-size: 14px;
 }
 
+/* GRID */
 .profile-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
 }
 
-.profile-grid video {
+.profile-grid-item {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.profile-grid-item video {
   width: 100%;
   height: 250px;
   object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 36px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.profile-grid-item:hover .play-overlay {
+  opacity: 1;
+}
+
+/* MODAL */
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.video-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 480px;
+  width: 90%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.modal-video {
+  width: 100%;
+  border-radius: 8px;
+  max-height: 400px;
+}
+
+.modal-caption {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ACTIONS */
+.modal-actions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.modal-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.modal-action-btn:hover {
+  opacity: 0.7;
+}
+
+/* COMMENTS */
+.modal-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-comments-list {
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-comment-item {
+  font-size: 13px;
+  color: #333;
+  margin: 0;
+}
+
+.no-comments {
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+}
+
+.modal-comment-input {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-comment-input input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 13px;
+}
+
+.modal-comment-input button {
+  padding: 8px 14px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.modal-comment-input button:hover {
+  background: #333;
 }
