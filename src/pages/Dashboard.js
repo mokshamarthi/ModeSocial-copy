@@ -58,17 +58,32 @@ function Dashboard({ setPage, setSelectedUserUid, mode }) {
   useEffect(() => {
     const fetchPosts = async () => {
       const snap = await getDocs(collection(db, "posts"));
-      const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-
+      const data = snap.docs.map(d => {
+  const p = d.data();
+  return {
+    id: d.id,
+    ...p,
+    minAge: Number(p.minAge)
+  };
+});
       const filteredByMode =
-        mode === "all"
-          ? data
-          : data.filter(post => {
-              if (!post.mode) return true;
-              return post.mode === mode;
-            });
+  mode === "all"
+    ? data
+    : data.filter(post => {
 
-      setPosts(filteredByMode);
+        // ✅ KIDS MODE (minAge <= 13)
+        if (mode === "kids") {
+          return (
+            post.minAge !== undefined &&
+            Number(post.minAge) <= 13
+          );
+        }
+
+        // ✅ OTHER MODES
+        return post.mode === mode;
+      });
+
+setPosts(filteredByMode);
     };
     fetchPosts();
   }, [uid, mode]);

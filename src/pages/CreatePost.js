@@ -120,7 +120,6 @@ function CreatePost({ setPage }) {
               <option value="">Select category</option>
               <option value="study">Study</option>
               <option value="devotional">Devotional</option>
-              <option value="kids">Kids</option>
               <option value="comedy">Comedy</option>
               <option value="fashion">Fashion</option>
               <option value="food">Food</option>
