@@ -41,12 +41,12 @@
   max-width: 95vw;
   overflow-x: auto;
   background: #000000;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(255,255,255,0.06), 0 1px 4px rgba(255,255,255,0.04);
   margin-top: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   scroll-behavior: smooth;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.75);
 }
 
 .stories-bar::-webkit-scrollbar { display: none; }
@@ -142,15 +142,18 @@
   width: 600px;
   max-width: 95vw;
   background: #000000;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  margin-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(255,255,255,0.06), 0 1px 4px rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  margin-bottom: 24px;
   overflow: hidden;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.25s, transform 0.25s;
 }
 
-.post-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.8); }
+.post-card:hover {
+  box-shadow: 0 8px 40px rgba(255,255,255,0.09), 0 2px 8px rgba(255,255,255,0.05);
+  transform: translateY(-2px);
+}
 
 /* ─── Post Header ────────────────────────────────────── */
 .post-header {
@@ -639,6 +642,19 @@
 
 .btn-logout:active {
   transform: translateY(0);
+}
+
+/* ─── Force overrides (Bootstrap/inline style fix) ───── */
+.post-card,
+.post-card.card {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #f0f0f5 !important;
+}
+
+.stories-bar {
+  background: #000000 !important;
+  background-color: #000000 !important;
 }
 
 /* ─── Responsive ─────────────────────────────────────── */
