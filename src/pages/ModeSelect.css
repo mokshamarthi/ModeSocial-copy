@@ -1,118 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;800&family=Cormorant+Garamond:wght@600;700&display=swap');
+
 .mode-page {
   min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: #ffffff;          /* pure white background */
+  background: #000000;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .mode-card {
   width: 100%;
   max-width: 420px;
-  padding: 24px 22px 20px;
-  border-radius: 18px;
-  background: #ffffff;
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(0, 0, 0, 0.04);  /* subtle border */
+  padding: 36px 32px 28px;
+  border-radius: 20px;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 24px rgba(255,255,255,0.06), 0 1px 4px rgba(255,255,255,0.04);
   text-align: left;
 }
 
-/* text */
+/* ─── Text ───────────────────────────────────────────── */
 .mode-title {
-  margin: 0 0 4px;
-  font-size: 22px;
+  margin: 0 0 6px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
   font-weight: 700;
-  color: #111111;              /* almost black */
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
 }
 
 .mode-subtitle {
-  margin: 0 0 18px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #555555;              /* medium gray */
+  margin: 0 0 24px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.45);
 }
 
-/* SELECT AREA */
+/* ─── Select Area ────────────────────────────────────── */
 .mode-select-wrapper {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .mode-label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 12px;
+  margin-bottom: 8px;
+  font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #777777;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .mode-select {
   width: 100%;
-  border-radius: 10px;
-  border: 1px solid #dddddd;
-  padding: 10px 12px;
-  padding-right: 32px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 13px 36px 13px 14px;
   font-size: 14px;
-  color: #111111;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  color: #f0f0f5;
   background:
-    url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888888' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-      no-repeat right 10px center,
-    #ffffff;
+    url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaaaaa' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat right 14px center,
+    rgba(255, 255, 255, 0.06);
   appearance: none;
   outline: none;
-  transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    background-color 0.18s ease;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.mode-select option {
+  background: #111111;
+  color: #f0f0f5;
 }
 
 .mode-select:hover {
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .mode-select:focus {
-  border-color: #111111;
-  box-shadow: 0 0 0 1px #111111;
-  background-color: #ffffff;
+  border-color: rgba(224, 64, 251, 0.6);
+  box-shadow: 0 0 0 3px rgba(224, 64, 251, 0.12);
+  background-color: rgba(255, 255, 255, 0.09);
 }
 
-/* BUTTON – black pill */
+/* ─── Button ─────────────────────────────────────────── */
 .mode-button {
   width: 100%;
-  margin-top: 6px;
+  margin-top: 4px;
   border: none;
-  border-radius: 999px;
-  padding: 11px 16px;
-  font-size: 14px;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 0.97rem;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   color: #ffffff;
-  background: #111111;
+  background: linear-gradient(135deg, #e040fb, #ff6b6b);
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-  transition:
-    transform 0.1s ease-out,
-    box-shadow 0.1s ease-out,
-    background-color 0.1s ease-out;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 24px rgba(224, 64, 251, 0.3);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .mode-button:hover {
-  transform: translateY(-1px);
-  background-color: #000000;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(224, 64, 251, 0.4);
+  filter: brightness(1.08);
 }
 
 .mode-button:active {
   transform: translateY(0);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(224, 64, 251, 0.25);
 }
 
-/* hint */
+/* ─── Hint ───────────────────────────────────────────── */
 .mode-hint {
-  margin-top: 10px;
+  margin-top: 14px;
   font-size: 12px;
-  color: #777777;
+  color: rgba(255, 255, 255, 0.25);
   text-align: center;
+  line-height: 1.6;
 }

@@ -1,66 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;800&display=swap');
 
-/* ── Reset & Base ── */
+/* ─── Reset ──────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-:root {
-  --bg:        #f9f9fb;
-  --border:    #e2e2ea;
-  --accent:    #e53935;
-  --accent-dim:#e5393514;
-  --amber:     #f59e0b;
-  --amber-dim: #f59e0b18;
-  --text:      #1a1a2e;
-  --muted:     #888899;
-  --card-bg:   #ffffff;
-  --radius:    14px;
-  --sans:      'Inter', sans-serif;
-  --max-w:     860px;
-}
-
-/* ── Container — centers everything ── */
+/* ─── Container ──────────────────────────────────────── */
 .admin-container {
   min-height: 100vh;
-  background: var(--bg);
-  font-family: var(--sans);
-  color: var(--text);
+  background: #000000;
+  font-family: 'DM Sans', sans-serif;
+  color: #f0f0f5;
   padding: 0 0 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* ── Header ── */
+/* ─── Header ─────────────────────────────────────────── */
 .admin-header {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   padding: 40px 24px 28px;
-  border-bottom: 1px solid var(--border);
-  background: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: #000000;
   text-align: center;
 }
 
 .admin-header h1 {
-  font-size: 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
   font-weight: 800;
-  color: var(--text);
+  color: #ffffff;
+  letter-spacing: -0.3px;
   line-height: 1.2;
 }
 
 .admin-header p {
-  font-size: 14px;
-  color: var(--muted);
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.4);
   font-weight: 400;
 }
 
-/* ── Stats ── */
+/* ─── Stats ──────────────────────────────────────────── */
 .stats {
   display: flex;
   justify-content: center;
@@ -71,14 +58,14 @@
 }
 
 .stat-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 32px;
+  background: #000000;
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 20px;
+  padding: 20px 40px;
   position: relative;
   overflow: hidden;
   min-width: 160px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 24px rgba(255,255,255,0.06);
   text-align: center;
 }
 
@@ -86,47 +73,51 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: var(--radius);
-  background: linear-gradient(135deg, var(--accent-dim), transparent 60%);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(224,64,251,0.08), transparent 60%);
   pointer-events: none;
 }
 
 .stat-card h2 {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 800;
-  letter-spacing: -1px;
-  color: var(--accent);
+  letter-spacing: -1.5px;
+  background: linear-gradient(135deg, #e040fb, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1;
 }
 
 .stat-card p {
-  margin-top: 4px;
-  font-size: 12px;
-  color: var(--muted);
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-weight: 600;
 }
 
-/* ── Loading / Empty ── */
+/* ─── Loading / Empty ────────────────────────────────── */
 .loading,
 .no-posts {
   text-align: center;
   margin-top: 80px;
   font-size: 14px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.35);
 }
 
 .no-posts {
-  color: var(--text);
+  color: rgba(255,255,255,0.6);
   font-size: 16px;
+  font-weight: 500;
 }
 
-/* ── Posts Grid — 2 columns, centered ── */
+/* ─── Posts Grid ─────────────────────────────────────── */
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(2, 500px);
-  gap: 28px;
+  gap: 24px;
   padding: 28px 24px 0;
   justify-content: center;
   align-items: start;
@@ -134,43 +125,43 @@
   max-width: 1080px;
 }
 
-/* ── Post Card ── */
+/* ─── Post Card ──────────────────────────────────────── */
 .post-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: #000000;
+  border: 1px solid rgba(255,255,255,0.75);
+  border-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   width: 500px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(255,255,255,0.06);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
 .post-card:hover {
-  border-color: #e5393544;
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(229,57,53,0.1);
+  box-shadow: 0 10px 32px rgba(224,64,251,0.15);
+  border-color: rgba(224,64,251,0.5);
 }
 
-/* ── Video — fixed height reel ── */
+/* ─── Video ──────────────────────────────────────────── */
 .post-video {
   width: 500px;
   height: 400px;
   object-fit: cover;
-  background: #111;
+  background: #000;
   display: block;
 }
 
-/* ── Post Content ── */
+/* ─── Post Content ───────────────────────────────────── */
 .post-content {
-  padding: 14px 16px 16px;
+  padding: 16px 18px 18px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* ── Top Row ── */
+/* ─── Top Row ────────────────────────────────────────── */
 .top-row {
   display: flex;
   align-items: center;
@@ -180,33 +171,33 @@
 
 .top-row h3 {
   font-size: 14px;
-  font-weight: 800;
-  color: var(--text);
+  font-weight: 700;
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* ── Badge ── */
+/* ─── Badge ──────────────────────────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  background: var(--amber-dim);
-  border: 1px solid #f59e0b33;
-  color: var(--amber);
-  font-size: 22px;
-  font-weight: 800;
-  padding: 5px 13px;
+  gap: 5px;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 14px;
   border-radius: 99px;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* ── Caption ── */
+/* ─── Caption ────────────────────────────────────────── */
 .caption {
   font-size: 13px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.5);
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -214,25 +205,27 @@
   overflow: hidden;
 }
 
-/* ── Delete Button ── */
+/* ─── Delete Button ──────────────────────────────────── */
 .delete-btn {
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   background: transparent;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  font-family: var(--sans);
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  color: #ff6b6b;
+  font-family: 'DM Sans', sans-serif;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.02em;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.18s, color 0.18s;
+  transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.15s;
 }
 
 .delete-btn:hover {
-  background: var(--accent);
+  background: rgba(255, 107, 107, 0.12);
+  border-color: #ff6b6b;
   color: #fff;
+  transform: translateY(-1px);
 }
 
 .delete-btn:active {
@@ -240,7 +233,7 @@
   transform: scale(0.98);
 }
 
-/* ── Responsive ── */
+/* ─── Responsive ─────────────────────────────────────── */
 @media (max-width: 600px) {
   .admin-header {
     padding: 28px 16px 20px;
@@ -257,6 +250,6 @@
   }
 
   .post-video {
-    height: 400px;
+    height: 360px;
   }
 }

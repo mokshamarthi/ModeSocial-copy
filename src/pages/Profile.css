@@ -1,21 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;800&display=swap');
+
+/* ─── Container ──────────────────────────────────────── */
 .profile-container {
   max-width: 900px;
   margin: auto;
-  padding: 20px;
+  padding: 32px 20px;
+  background: #000000;
+  min-height: calc(100vh - 80px);
+  font-family: 'DM Sans', sans-serif;
 }
 
+/* ─── Header ─────────────────────────────────────────── */
 .profile-header {
   display: flex;
   gap: 40px;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
+  padding: 28px 32px;
+  background: #000000;
+  border-radius: 20px;
 }
 
+/* ─── Profile Pic ────────────────────────────────────── */
 .profile-pic-wrapper {
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-pic-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e040fb, #ff6b6b);
+  z-index: -1;
 }
 
 .profile-pic {
@@ -23,41 +45,64 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  border: 3px solid #000;
 }
 
 .profile-pic-default {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  color: #ccc;
+  color: rgba(255,255,255,0.3);
 }
 
+/* ─── Info ───────────────────────────────────────────── */
 .profile-info h2 {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
 }
 
 .profile-stats {
   display: flex;
   gap: 20px;
   font-size: 14px;
+  color: rgba(255,255,255,0.6);
 }
 
-/* GRID */
+.profile-stats b {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ─── Grid ───────────────────────────────────────────── */
 .profile-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
+  gap: 10px;
 }
 
 .profile-grid-item {
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.75);
+  aspect-ratio: 4 / 5;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.profile-grid-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(224,64,251,0.18);
+  border-color: rgba(224,64,251,0.6);
 }
 
 .profile-grid-item video {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
   display: block;
   pointer-events: none;
@@ -69,32 +114,36 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-  font-size: 36px;
+  background: rgba(0,0,0,0.45);
+  color: #ffffff;
+  font-size: 32px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s;
 }
 
 .profile-grid-item:hover .play-overlay {
   opacity: 1;
 }
 
-/* MODAL */
+/* ─── Modal Overlay ──────────────────────────────────── */
 .video-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0,0,0,0.88);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(8px);
 }
 
+/* ─── Modal ──────────────────────────────────────────── */
 .video-modal {
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
+  background: #000000;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.75);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.8);
+  padding: 20px;
   max-width: 480px;
   width: 90%;
   position: relative;
@@ -102,38 +151,70 @@
   overflow-y: auto;
 }
 
+.video-modal::-webkit-scrollbar { width: 3px; }
+.video-modal::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+}
+
+/* ─── Close Button ───────────────────────────────────── */
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 12px;
-  background: none;
+  top: 12px;
+  right: 14px;
+  background: rgba(255,255,255,0.08);
   border: none;
-  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
   cursor: pointer;
-  color: #333;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
 }
 
+.modal-close:hover {
+  background: rgba(255,255,255,0.16);
+  color: #fff;
+}
+
+/* ─── Video ──────────────────────────────────────────── */
 .modal-video {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   max-height: 400px;
+  background: #000;
+  display: block;
 }
 
+/* ─── Caption ────────────────────────────────────────── */
 .modal-caption {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 14px;
-  color: #333;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
 }
 
-/* ACTIONS */
+.modal-caption b {
+  background: linear-gradient(90deg, #e040fb, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* ─── Actions ────────────────────────────────────────── */
 .modal-actions {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   align-items: center;
-  padding: 10px 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  margin: 10px 0;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin: 12px 0;
 }
 
 .modal-action-btn {
@@ -142,14 +223,17 @@
   gap: 6px;
   cursor: pointer;
   font-size: 14px;
-  color: #333;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.15s, transform 0.15s;
 }
 
 .modal-action-btn:hover {
-  opacity: 0.7;
+  color: #fff;
+  transform: scale(1.08);
 }
 
-/* COMMENTS */
+/* ─── Comments ───────────────────────────────────────── */
 .modal-comments {
   display: flex;
   flex-direction: column;
@@ -164,42 +248,74 @@
   gap: 6px;
 }
 
+.modal-comments-list::-webkit-scrollbar { width: 3px; }
+.modal-comments-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+}
+
 .modal-comment-item {
   font-size: 13px;
-  color: #333;
+  color: rgba(255,255,255,0.75);
   margin: 0;
+  line-height: 1.5;
+}
+
+.modal-comment-item b {
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .no-comments {
   font-size: 13px;
-  color: #999;
+  color: rgba(255,255,255,0.3);
   text-align: center;
 }
 
+/* ─── Comment Input ──────────────────────────────────── */
 .modal-comment-input {
   display: flex;
   gap: 8px;
+  margin-top: 4px;
 }
 
 .modal-comment-input input {
   flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
+  padding: 9px 14px;
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 20px;
   outline: none;
   font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  background: rgba(255,255,255,0.06);
+  color: #f0f0f5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-comment-input input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.modal-comment-input input:focus {
+  border-color: rgba(224,64,251,0.5);
+  box-shadow: 0 0 0 3px rgba(224,64,251,0.1);
+  background: rgba(255,255,255,0.09);
 }
 
 .modal-comment-input button {
-  padding: 8px 14px;
-  background: #000;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #e040fb, #ff6b6b);
   color: #fff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.15s;
 }
 
 .modal-comment-input button:hover {
-  background: #333;
+  opacity: 0.88;
+  transform: translateY(-1px);
 }

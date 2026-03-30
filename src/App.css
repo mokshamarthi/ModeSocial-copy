@@ -65,3 +65,11 @@
 .navbar-right .logout-btn:hover {
   background: #e02a20;
 }
+/* Global background fix — paste into index.css or App.css */
+
+html, body, #root {
+  background: #000000 !important;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
