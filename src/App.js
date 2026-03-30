@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ModeSelect from "./pages/ModeSelect";
@@ -11,7 +11,13 @@ import ReelsPage from "./pages/ReelsPage";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("login");
+
+  // ✅ Login persistence
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
+
+  const [page, setPage] = useState("dashboard");
 
   const [mode, setMode] = useState(
     localStorage.getItem("mode") || "all"
@@ -22,11 +28,18 @@ function App() {
   // ✅ Admin check
   const isAdmin = localStorage.getItem("isAdmin") === "true";
 
+  // ✅ Redirect if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setPage("login");
+    }
+  }, [isLoggedIn]);
+
   return (
     <div className="app-container">
 
       {/* ✅ Navbar */}
-      {page !== "login" && page !== "register" && (
+      {isLoggedIn && page !== "login" && page !== "register" && (
         <div className="navbar">
 
           {/* Left */}
@@ -97,6 +110,7 @@ function App() {
               onClick={() => {
                 localStorage.clear();
                 setSelectedUserUid(null);
+                setIsLoggedIn(false);
                 setPage("login");
                 setMode("all");
               }}
@@ -111,53 +125,59 @@ function App() {
       {/* ✅ Main content */}
       <div className="main-content">
 
-        {page === "login" && (
-          <Login setPage={setPage} />
-        )}
+        {!isLoggedIn ? (
+          <>
+            {page === "login" && (
+              <Login setPage={setPage} setIsLoggedIn={setIsLoggedIn} />
+            )}
 
-        {page === "register" && (
-          <div className="auth-container">
-            <Register setPage={setPage} />
-            <button
-              className="switch-btn"
-              onClick={() => setPage("login")}
-            >
-              Already have an account? Login
-            </button>
-          </div>
-        )}
+            {page === "register" && (
+              <div className="auth-container">
+                <Register setPage={setPage} />
+                <button
+                  className="switch-btn"
+                  onClick={() => setPage("login")}
+                >
+                  Already have an account? Login
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            {page === "mode" && (
+              <ModeSelect setMode={setMode} setPage={setPage} />
+            )}
 
-        {page === "mode" && (
-          <ModeSelect setMode={setMode} setPage={setPage} />
-        )}
+            {page === "dashboard" && (
+              <Dashboard
+                mode={mode}
+                setPage={setPage}
+                setSelectedUserUid={setSelectedUserUid}
+              />
+            )}
 
-        {page === "dashboard" && (
-          <Dashboard
-            mode={mode}
-            setPage={setPage}
-            setSelectedUserUid={setSelectedUserUid}
-          />
-        )}
+            {page === "reels" && (
+              <ReelsPage
+                mode={mode}
+                setPage={setPage}
+                setSelectedUserUid={setSelectedUserUid}
+              />
+            )}
 
-        {page === "reels" && (
-          <ReelsPage
-            mode={mode}
-            setPage={setPage}
-            setSelectedUserUid={setSelectedUserUid}
-          />
-        )}
+            {page === "create" && (
+              <div className="auth-container">
+                <CreatePost setPage={setPage} />
+              </div>
+            )}
 
-        {page === "create" && (
-          <div className="auth-container">
-            <CreatePost setPage={setPage} />
-          </div>
-        )}
+            {page === "profile" && (
+              <Profile selectedUserUid={selectedUserUid} />
+            )}
 
-        {page === "profile" && (
-          <Profile selectedUserUid={selectedUserUid} />
+            {page === "admin" && <Admin />}
+          </>
         )}
-
-        {page === "admin" && <Admin />}
 
       </div>
     </div>
